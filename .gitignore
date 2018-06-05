@@ -28,3 +28,6 @@ nbdist/
 /.gradle/
 src/test/java/uk/co/thetrenchers/config/
 /springpong.iml
+/aws.txt
+.kube/
+projectFilesBackup/

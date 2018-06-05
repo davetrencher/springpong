@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springpong-deployment
+spec:
+  replicas: 1 # tells deployment to run 2 pods matching the template
+  selector:
+    matchLabels:
+      app: springpong
+  template: # create pods using pod definition in this template
+      metadata:
+        labels:
+          app: springpong
+      spec:
+        containers:
+        - name: springpong
+          image: thetrenchers/springpong
+          ports:
+          - containerPort: 8080
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: springpong-service
+spec:
+  selector:
+    app: springpong
+  ports:
+  - protocol: TCP
+    port: 8080
+---

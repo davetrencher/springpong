@@ -18,11 +18,9 @@ import uk.co.thetrenchers.spring.SpringProfile;
 
 import javax.annotation.Resource;
 
-import static org.hamcrest.CoreMatchers.containsString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith( SpringJUnit4ClassRunner.class )
@@ -57,8 +55,7 @@ public class PingControllerTest {
 
         mockMvc.perform(get(REST_ENDPOINT_PING,String.class))
                 .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().string(containsString(RESPONSE_MESSAGE)));
+                .andExpect(status().isOk());
 
     }
 }

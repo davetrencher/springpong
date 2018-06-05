@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.RestController;
 import uk.co.thetrenchers.config.ApplicationProperties;
 import uk.co.thetrenchers.model.Ping;
 
+import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Base64;
 
 @RestController
 public class PingController {
@@ -26,7 +28,22 @@ public class PingController {
     }
 
     public String getPingMessage() {
-        return applicationProperties.getPingProperties().getPingMessage();
+
+        try {
+            SecureRandom random = SecureRandom.getInstanceStrong();
+            byte[] values = new byte[20];
+            random.nextBytes(values);
+
+            Base64.Encoder encoder = Base64.getUrlEncoder().withoutPadding();
+            String token = encoder.encodeToString(values);
+            return token;
+
+        } catch (Exception e) {
+            System.out.println("blocked:" +e);
+        }
+
+        return null;
+
     }
 
 

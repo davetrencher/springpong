@@ -1,0 +1,21 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "8090:8080"
+    depends_on:
+      - "redis"
+    networks:
+      - spring
+  redis:
+    image: redis
+    command: [ "redis-server", "--protected-mode", "no" ]
+    ports:
+      - "6379:6379"
+    networks:
+      - spring
+
+networks:
+  spring:
+    external: true
